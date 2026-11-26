@@ -1,0 +1,4 @@
+* first Adripio release, based on HeliBoard 4.3-beta2
+* new package io.adrip.keyboard, installs next to HeliBoard
+* debug and release builds share one package and one signing key
+* add the floating button: tap hides or shows the keyboard, double tap switches between fixed and floating, long press opens the keyboard picker (Settings > Floating button)
