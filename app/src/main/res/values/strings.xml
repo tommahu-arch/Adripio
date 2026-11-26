@@ -926,6 +926,20 @@ New dictionary:
     <string name="show_vertical_space_swipe">Vertical spacebar swipe gesture</string>
     <!-- Option for no action when (currently only used for swiping the spacebar) -->
     <string name="action_none">None</string>
+    <!-- Adripio floating button -->
+    <string name="floating_button_title">Floating button</string>
+    <string name="floating_button_enable">Show the floating button</string>
+    <string name="floating_button_enable_summary">A small round button over other apps. Drag it to move it. Needs \"Display over other apps\"</string>
+    <string name="floating_button_permission_missing">Allow display over other apps</string>
+    <string name="floating_button_permission_missing_summary">The button is on, but Android does not let Adripio draw over other apps yet. Tap to open the setting</string>
+    <string name="floating_button_gestures_category">Gestures</string>
+    <string name="floating_button_tap">Tap</string>
+    <string name="floating_button_double_tap">Double tap</string>
+    <string name="floating_button_double_tap_summary">With a double tap action, a tap waits a moment to be sure no second tap follows</string>
+    <string name="floating_button_long_press">Long press</string>
+    <string name="floating_button_action_toggle_keyboard">Hide or show the keyboard</string>
+    <string name="floating_button_action_toggle_floating">Switch between fixed and floating keyboard</string>
+    <string name="floating_button_action_ime_picker">Choose keyboard</string>
     <!-- Option to move the cursor when swiping the spacebar -->
     <string name="space_swipe_move_cursor_entry">Move cursor</string>
     <!-- Option to toggle the numpad when swiping the spacebar -->

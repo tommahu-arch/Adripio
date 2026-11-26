@@ -375,6 +375,18 @@ class KeyboardSwitcher private constructor() {
         reloadKeyboard()
     }
 
+    /** Switches between the fixed and the floating keyboard, same as the toolbar key, but callable from outside the keyboard. */
+    fun toggleFloatingKeyboard() {
+        val enable = !Settings.getValues().mIsFloatingKeyboard
+        if (inputView == null) {
+            // no keyboard view yet: only remember the choice, it applies when the keyboard is shown
+            setFloatingKeyboardEnabled(themeContext, enable)
+            return
+        }
+        SwitchActions().setFloatingKeyboardEnabled(enable)
+        reloadKeyboard()
+    }
+
     fun reloadKeyboard() {
         if (inputView == null) return
         emojiPalettes?.clearKeyboardCache()

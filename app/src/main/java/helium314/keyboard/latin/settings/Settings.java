@@ -111,6 +111,13 @@ public final class Settings implements SharedPreferences.OnSharedPreferenceChang
     public static final String PREF_FLOATING_ENABLED_PREFIX = "floating_enabled";
     public static final String PREF_FLOATING_POS_X_PREFIX = "floating_pos_x";
     public static final String PREF_FLOATING_POS_Y_PREFIX = "floating_pos_y";
+    // Adripio floating button. Position keys start with "floating_pos" so dragging does not reload all settings.
+    public static final String PREF_FLOATING_BUTTON_ENABLED = "floating_button_enabled";
+    public static final String PREF_FLOATING_BUTTON_TAP = "floating_button_tap";
+    public static final String PREF_FLOATING_BUTTON_DOUBLE_TAP = "floating_button_double_tap";
+    public static final String PREF_FLOATING_BUTTON_LONG_PRESS = "floating_button_long_press";
+    public static final String PREF_FLOATING_BUTTON_POS_X = "floating_pos_button_x";
+    public static final String PREF_FLOATING_BUTTON_POS_Y = "floating_pos_button_y";
     public static final String PREF_FONT_SCALE = "font_scale";
     public static final String PREF_HINT_FONT_SCALE = "hint_font_scale";
     public static final String PREF_EMOJI_FONT_SCALE = "emoji_font_scale";

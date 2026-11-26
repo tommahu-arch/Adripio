@@ -38,6 +38,7 @@ fun MainSettingsScreen(
     onClickGestureTyping: () -> Unit,
     onClickDataGathering: () -> Unit,
     onClickAdvanced: () -> Unit,
+    onClickFloatingButton: () -> Unit,
     onClickAppearance: () -> Unit,
     onClickLanguage: () -> Unit,
     onClickLayouts: () -> Unit,
@@ -109,6 +110,11 @@ fun MainSettingsScreen(
                     icon = R.drawable.ic_settings_advanced
                 ) { NextScreenIcon() }
                 Preference(
+                    name = stringResource(R.string.floating_button_title),
+                    onClick = onClickFloatingButton,
+                    icon = R.drawable.ic_settings_floating_button
+                ) { NextScreenIcon() }
+                Preference(
                     name = stringResource(R.string.settings_screen_about),
                     onClick = onClickAbout,
                     icon = R.drawable.ic_settings_about
@@ -124,7 +130,7 @@ private fun PreviewScreen() {
     initPreview(LocalContext.current)
     Theme(previewDark) {
         Surface {
-            MainSettingsScreen({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})
+            MainSettingsScreen({}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {})
         }
     }
 }
