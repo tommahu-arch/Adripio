@@ -50,6 +50,7 @@ import helium314.keyboard.latin.common.Constants;
 import helium314.keyboard.latin.common.InputPointers;
 import helium314.keyboard.latin.define.DebugFlags;
 import helium314.keyboard.latin.dictionary.history.UserHistoryDictUtils;
+import helium314.keyboard.latin.floatingbutton.FloatingButtonController;
 import helium314.keyboard.latin.inputlogic.InputLogic;
 import helium314.keyboard.latin.settings.Settings;
 import helium314.keyboard.latin.settings.SettingsSubtype;
@@ -96,6 +97,7 @@ public class LatinIME extends InputMethodService implements
         SuggestionStripView.Listener, SuggestionStripViewAccessor,
         DictionaryFacilitator.DictionaryInitializationListener {
     static final String TAG = LatinIME.class.getSimpleName();
+    private FloatingButtonController mFloatingButton;
     private static final boolean TRACE = false;
 
     private static final int PERIOD_FOR_AUDIO_AND_HAPTIC_FEEDBACK_IN_KEY_REPEAT = 2;
@@ -500,6 +502,8 @@ public class LatinIME extends InputMethodService implements
         mClipboardHistoryManager.onCreate();
         mHandler.onCreate();
         mReceiver.register(this);
+        mFloatingButton = new FloatingButtonController(this);
+        mFloatingButton.onCreate();
 
         StatsUtils.onCreate(mSettings.getCurrent(), mRichImm);
     }
@@ -614,6 +618,7 @@ public class LatinIME extends InputMethodService implements
 
     @Override
     public void onDestroy() {
+        mFloatingButton.onDestroy();
         mClipboardHistoryManager.onDestroy();
         mDictionaryFacilitator.closeDictionaries();
         mSettings.onDestroy();
@@ -633,6 +638,7 @@ public class LatinIME extends InputMethodService implements
     public void onConfigurationChanged(final Configuration conf) {
         SettingsValues settingsValues = mSettings.getCurrent();
         Log.i(TAG, "onConfigurationChanged");
+        mFloatingButton.reposition();
         SubtypeSettings.INSTANCE.reloadSystemLocales(this);
         if (settingsValues.mDisplayOrientation != conf.orientation) {
             mHandler.startOrientationChanging();
@@ -919,6 +925,7 @@ public class LatinIME extends InputMethodService implements
     @Override
     public void onWindowShown() {
         super.onWindowShown();
+        mFloatingButton.update(); // e.g. overlay permission was granted or revoked meanwhile
         if (isInputViewShown()) {
             mKeyboardSwitcher.onWindowShown();
             setNavigationBarColor();
