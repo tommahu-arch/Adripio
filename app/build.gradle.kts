@@ -1,4 +1,5 @@
 import com.android.build.api.variant.ApplicationVariant
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -6,11 +7,22 @@ plugins {
     kotlin("plugin.compose") version "2.4.0"
 }
 
+// Signing: keystore.properties (gitignored; in local/ or the project root) with storeFile, storePassword,
+// keyAlias and keyPassword. Every build type uses this one key, so debug and release APKs install over
+// each other and keep their data. Without the file, release builds are unsigned and debug builds fall
+// back to the default debug key.
+val keystoreProperties = Properties().apply {
+    listOf("local/keystore.properties", "keystore.properties")
+        .map(rootProject::file)
+        .firstOrNull { it.exists() }
+        ?.inputStream()?.use(::load)
+}
+
 android {
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "helium314.keyboard"
+        applicationId = "io.adrip.keyboard"
         minSdk = 21
         targetSdk = 37
         versionCode = 4301
@@ -20,6 +32,17 @@ android {
             abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64"))
         }
         proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+    }
+
+    signingConfigs {
+        if (!keystoreProperties.isEmpty) {
+            create("adripio") {
+                storeFile = rootProject.file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            }
+        }
     }
 
     buildTypes {
@@ -40,7 +63,6 @@ android {
             // and for better performance in case users want to install a debug APK
             isMinifyEnabled = true
             isJniDebuggable = false
-            applicationIdSuffix = ".debug"
         }
         create("runTests") { // build variant for running tests on CI that skips tests known to fail
             isMinifyEnabled = false
@@ -50,9 +72,12 @@ android {
             isDebuggable = true
             isMinifyEnabled = false
             isJniDebuggable = false
-            signingConfig = signingConfigs.getByName("debug")
-            applicationIdSuffix = ".debug"
             //isDefault = true // would be nice as default, but breaks unit test handling in Android Studio
+        }
+
+        // One identity for every build type: same package, same labels, same key.
+        signingConfigs.findByName("adripio")?.let { key ->
+            all { signingConfig = key }
         }
 
         androidComponents.onVariants { variant: ApplicationVariant ->
@@ -66,7 +91,7 @@ android {
             }
             variant.outputs.forEach { output ->
                 if (output is com.android.build.api.variant.impl.VariantOutputImpl) {
-                    output.outputFileName = "HeliBoard_${defaultConfig.versionName}-${variant.buildType}.apk"
+                    output.outputFileName = "Adripio_${defaultConfig.versionName}-${variant.buildType}.apk"
                 }
             }
         }

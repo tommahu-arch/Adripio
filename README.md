@@ -1,3 +1,7 @@
+> **Adripio** is a personal fork of [HeliBoard](https://github.com/HeliBorg/HeliBoard) (GPL-3.0). Package
+> `io.adrip.keyboard`; debug and release builds share one package and one signing key. Original copyright
+> notices are kept; this fork modifies the original work.
+
 # HeliBoard
 HeliBoard is a privacy-conscious and customizable open-source keyboard, based on AOSP / OpenBoard.
 Does not use internet permission, and thus is 100% offline.
