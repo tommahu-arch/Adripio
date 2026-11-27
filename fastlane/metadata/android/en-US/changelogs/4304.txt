@@ -1,0 +1,3 @@
+* the number row, function keys row and SSH keys row can each be made shorter (per language settings); the keyboard height shrinks with them
+* fix a rare crash at app start
+* debug builds no longer replace the language name on the space bar with dictionary info
