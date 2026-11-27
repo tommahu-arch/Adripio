@@ -320,6 +320,7 @@
     <string name="function_row_height">Function keys row height</string>
     <string name="ssh_row_height">SSH keys row height</string>
     <string name="show_number_row_for_subtype">Show number row</string>
+    <string name="show_number_row_with_dot">Show number row with dot</string>
     <string name="localized_number_row">Localize number row</string>
     <!-- Description of the settings to localize number row -->
     <string name="localized_number_row_summary">Prefer localized over latin numbers</string>

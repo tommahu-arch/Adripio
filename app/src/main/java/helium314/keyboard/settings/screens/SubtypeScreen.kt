@@ -205,31 +205,45 @@ fun SubtypeScreen(
                         }
                     }
                 }
-                run {
-                    val showNumberRow = currentSubtype.getExtraValueOf(ExtraValue.NUMBER_ROW)?.toBoolean()
-                    WithSmallTitle(stringResource(R.string.number_row)) {
-                        ActionRow {
-                            Text(stringResource(R.string.show_number_row_for_subtype),
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .padding(start = 10.dp)
-                            )
-                            Switch(
-                                checked = showNumberRow ?: prefs.getBoolean(
-                                    Settings.PREF_SHOW_NUMBER_ROW,
-                                    Defaults.PREF_SHOW_NUMBER_ROW
-                                ),
-                                onCheckedChange = {
-                                    setCurrentSubtype(currentSubtype.with(ExtraValue.NUMBER_ROW, it.toString()))
-                                }
-                            )
-                            DefaultButton(showNumberRow == null) {
-                                setCurrentSubtype(currentSubtype.without(ExtraValue.NUMBER_ROW))
+                WithSmallTitle(stringResource(R.string.extra_rows)) {
+                    val explicitNumberRow = currentSubtype.getExtraValueOf(ExtraValue.NUMBER_ROW)?.toBoolean()
+                    val numberRowShown = explicitNumberRow ?: prefs.getBoolean(
+                        Settings.PREF_SHOW_NUMBER_ROW, Defaults.PREF_SHOW_NUMBER_ROW)
+                    val withDot = numberRowShown && currentSubtype.getExtraValueOf(ExtraValue.NUMBER_ROW_DOT)?.toBoolean() == true
+                    // the two number row variants exclude each other
+                    ActionRow {
+                        Text(stringResource(R.string.show_number_row_for_subtype),
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(start = 10.dp)
+                        )
+                        Switch(
+                            checked = numberRowShown && !withDot,
+                            onCheckedChange = {
+                                setCurrentSubtype(currentSubtype.with(ExtraValue.NUMBER_ROW, it.toString())
+                                    .without(ExtraValue.NUMBER_ROW_DOT))
                             }
+                        )
+                        DefaultButton(explicitNumberRow == null && !withDot) {
+                            setCurrentSubtype(currentSubtype.without(ExtraValue.NUMBER_ROW).without(ExtraValue.NUMBER_ROW_DOT))
                         }
                     }
-                }
-                WithSmallTitle(stringResource(R.string.extra_rows)) {
+                    ActionRow {
+                        Text(stringResource(R.string.show_number_row_with_dot),
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(start = 10.dp)
+                        )
+                        Switch(
+                            checked = withDot,
+                            onCheckedChange = {
+                                setCurrentSubtype(
+                                    if (it) currentSubtype.with(ExtraValue.NUMBER_ROW, "true").with(ExtraValue.NUMBER_ROW_DOT, "true")
+                                    else currentSubtype.with(ExtraValue.NUMBER_ROW, "false").without(ExtraValue.NUMBER_ROW_DOT)
+                                )
+                            }
+                        )
+                    }
                     listOf(
                         ExtraValue.FUNCTION_ROW to R.string.function_row,
                         ExtraValue.SSH_ROW to R.string.ssh_row,

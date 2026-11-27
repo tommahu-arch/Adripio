@@ -324,6 +324,8 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
 
     private fun getNumberRow(): MutableList<KeyData> {
         val row = LayoutParser.parseLayout(LayoutType.NUMBER_ROW, params, context).first()
+        if (params.mId.subtype.hasExtraRow(ExtraValue.NUMBER_ROW_DOT))
+            row.add(TextKeyData(label = "."))
         val localizedNumbers = params.mLocaleKeyboardInfos.localizedNumberKeys
         if (localizedNumbers?.size != 10) return row
         if (Settings.getValues().mLocalizedNumberRow) {

@@ -98,6 +98,9 @@ public final class Constants {
             /** Overrides the general "show number row" setting ("true" or "false") */
             public static final String NUMBER_ROW = "NumberRow";
 
+            /** Adds a "." key after the 0 of the number row ("true") */
+            public static final String NUMBER_ROW_DOT = "NumberRowDot";
+
             /** Shows an extra row of function keys (F1-F12) above the keyboard ("true") */
             public static final String FUNCTION_ROW = "FunctionRow";
 

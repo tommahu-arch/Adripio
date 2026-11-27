@@ -45,6 +45,8 @@ HeliBoard, and its documentation (wiki, [layouts.md](layouts.md)) applies.
 
 **Per language options** (language settings screen)
 - Show the number row for this language only, overriding the general setting.
+- Number row per language, as an extra row: "Show number row" (0–9) or "Show number row with dot" (adds a `.` after `0`).
+- The default functional keys layout is always the phone one, never the tablet one.
 - Optional extra rows above the keyboard: function keys (Esc, F1–F12) and "SSH keys" (Esc, Tab, Ctrl, Alt, Meta, arrows).
   The rows are layout files in `assets/layouts/extra_rows`.
 
