@@ -65,6 +65,7 @@ private constructor(val themeId: Int, @JvmField val mStyleId: Int) {
         const val THEME_PINK = "pink"
         const val THEME_SAND = "sand"
         const val THEME_VIOLETTE = "violette"
+        const val THEME_DEMATERIALIS = "dematerialis"
         fun getAvailableDefaultColors(prefs: SharedPreferences, isNight: Boolean) = listOfNotNull(
             if (!isNight) THEME_LIGHT else null, THEME_DARK,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) THEME_DYNAMIC else null,
@@ -80,7 +81,8 @@ private constructor(val themeId: Int, @JvmField val mStyleId: Int) {
             if (!isNight) THEME_PINK else null,
             THEME_OCEAN,
             if (!isNight) THEME_SAND else null,
-            THEME_VIOLETTE
+            THEME_VIOLETTE,
+            THEME_DEMATERIALIS
         )
         val STYLES = arrayOf(STYLE_MATERIAL, STYLE_HOLO, STYLE_ROUNDED)
 
@@ -334,6 +336,18 @@ private constructor(val themeId: Int, @JvmField val mStyleId: Int) {
                     Color.rgb(150, 150, 216),
                     Color.WHITE,
                     Color.WHITE,
+                    keyboardBackground = backgroundImage
+                )
+                THEME_DEMATERIALIS -> DefaultColors(
+                    themeStyle,
+                    hasBorders,
+                    "#5e85ac".toColorInt(), // accent
+                    "#081218".toColorInt(), // keyboard background
+                    "#424f52".toColorInt(), // keys
+                    "#798c90".toColorInt(), // functional keys
+                    "#7cab9c".toColorInt(), // space bar
+                    "#e9f1f2".toColorInt(), // key text
+                    "#e9f1f2".toColorInt(), // key hint text
                     keyboardBackground = backgroundImage
                 )
                 else -> { // user-defined theme
