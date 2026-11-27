@@ -39,6 +39,7 @@
       { "$": "shift_state_selector",
         "manualOrLocked": { "label": ")" },
         "default": { "label": "0", "popup": { "relevant": [{ "label": "⁰" }, { "label": "ⁿ" }, { "label": "∅" }] } }
-      }
+      },
+      { "label": "." }
     ]
   ]

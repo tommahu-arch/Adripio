@@ -1,0 +1,13 @@
+[
+  [
+    {"label": "esc"},
+    {"label": "tab"},
+    {"label": "ctrl"},
+    {"label": "alt"},
+    {"label": "meta"},
+    {"label": "left"},
+    {"label": "down"},
+    {"label": "up"},
+    {"label": "right"}
+  ]
+]

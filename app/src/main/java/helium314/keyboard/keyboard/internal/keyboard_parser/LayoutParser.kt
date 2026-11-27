@@ -38,7 +38,9 @@ object LayoutParser {
         if (layoutType == LayoutType.FUNCTIONAL && !params.mId.element.takesFunctionalKeys)
             return mutableListOf(mutableListOf()) // no functional keys
         val layoutName = if (layoutType == LayoutType.MAIN) params.mId.subtype.mainLayoutName
-            else params.mId.subtype.layouts[layoutType] ?: Settings.readDefaultLayoutName(layoutType, context.prefs())
+            else params.mId.subtype.layouts[layoutType]
+                ?: if (layoutType == LayoutType.FUNCTIONAL && params.mId.subtype.mainLayoutName == "pcazerty_fr") "functional_keys_pc" // PC style bottom rows
+                else Settings.readDefaultLayoutName(layoutType, context.prefs())
         return layoutCache.getOrPut(layoutType.name + layoutName) {
             createCacheLambda(layoutType, layoutName, context)
         }(params).apply {
@@ -60,6 +62,17 @@ object LayoutParser {
     fun parseJsonString(layoutText: String, strict: Boolean = true): List<List<AbstractKeyData>> =
         if (strict) checkJsonConfig.decodeFromString(layoutText.stripCommentLines())
         else florisJsonConfig.decodeFromString(layoutText.stripCommentLines())
+
+    private val extraRowCache = hashMapOf<String, List<AbstractKeyData>>()
+
+    /** Parses the optional extra row `layouts/extra_rows/<name>.json` (single row, json format). */
+    fun parseExtraRow(name: String, params: KeyboardParams, context: Context): MutableList<KeyData> {
+        val row = extraRowCache.getOrPut(name) {
+            val text = context.assets.open("layouts/extra_rows/$name.json").reader().use { it.readText() }
+            parseJsonString(text, false).first()
+        }
+        return row.mapNotNullTo(mutableListOf()) { it.compute(params) }
+    }
 
     /** Parse simple layouts, defined only as rows of (normal) keys with popup keys. */
     fun parseSimpleString(layoutText: String): List<List<KeyData>> {

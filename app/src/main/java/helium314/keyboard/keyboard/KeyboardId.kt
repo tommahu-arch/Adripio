@@ -5,6 +5,7 @@
  */
 package helium314.keyboard.keyboard
 
+import helium314.keyboard.latin.utils.showsNumberRow
 import android.text.InputType
 import android.text.TextUtils
 import android.view.inputmethod.EditorInfo
@@ -51,7 +52,7 @@ data class KeyboardId(
         params.editorInfo.imeOptions,
         InputTypeUtils.getImeOptionsActionIdFromEditorInfo(params.editorInfo),
         params.deviceLocked,
-        params.settingsValues?.mShowsNumberRow ?: false,
+        params.subtype.showsNumberRow(params.settingsValues?.mShowsNumberRow ?: false),
         params.settingsValues?.mShowsNumberRowInSymbols ?: false,
         params.settingsValues?.isLanguageSwitchKeyEnabled ?: false,
         params.settingsValues?.mShowsEmojiKey ?: false,

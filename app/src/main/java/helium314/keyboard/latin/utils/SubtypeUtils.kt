@@ -19,6 +19,24 @@ import helium314.keyboard.latin.utils.SubtypeSettings.isEnabled
 import org.xmlpull.v1.XmlPullParser
 import java.util.Locale
 
+/** Whether the number row is shown for this subtype: the subtype's own setting, or [default] (the general setting) if it has none. */
+fun RichInputMethodSubtype.showsNumberRow(default: Boolean): Boolean =
+    getExtraValueOf(ExtraValue.NUMBER_ROW)?.toBoolean() ?: default
+
+/** Whether the optional extra row [extraValueKey] (ExtraValue.FUNCTION_ROW or SSH_ROW) is enabled for this subtype. */
+fun RichInputMethodSubtype.hasExtraRow(extraValueKey: String): Boolean =
+    getExtraValueOf(extraValueKey)?.toBoolean() == true
+
+/** Number of rows added to the 4 default rows: number row (or [defaultNumberRow] if the subtype has no setting) and extra rows. */
+fun RichInputMethodSubtype.extraRowCount(defaultNumberRow: Boolean): Int =
+    (if (showsNumberRow(defaultNumberRow)) 1 else 0) +
+        (if (hasExtraRow(ExtraValue.FUNCTION_ROW)) 1 else 0) + (if (hasExtraRow(ExtraValue.SSH_ROW)) 1 else 0)
+
+/** [extraRowCount] for the current subtype, for code that has no subtype at hand (e.g. clipboard and emoji view sizes). */
+fun currentSubtypeExtraRowCount(defaultNumberRow: Boolean): Int =
+    if (RichInputMethodManager.isInitialized()) RichInputMethodManager.getInstance().currentSubtype.extraRowCount(defaultNumberRow)
+    else if (defaultNumberRow) 1 else 0
+
 fun InputMethodSubtype.locale(): Locale {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         if (languageTag.isNotEmpty())
