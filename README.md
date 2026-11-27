@@ -57,7 +57,7 @@ HeliBoard, and its documentation (wiki, [layouts.md](layouts.md)) applies.
 - Floating button: tap hides or shows the keyboard, double tap switches between fixed and floating, long press opens the keyboard picker
   (Settings > Floating button).
 
-# Features of HeliBoard
+# Features inherited from HeliBoard
 <ul>
   <li>Add dictionaries for suggestions and spell check</li>
   <ul>
