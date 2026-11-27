@@ -95,6 +95,15 @@ public final class Constants {
             /** Overrides the general "localized number row" setting */
             public static final String LOCALIZED_NUMBER_ROW = "LocalizedNumberRow";
 
+            /** Overrides the general "show number row" setting ("true" or "false") */
+            public static final String NUMBER_ROW = "NumberRow";
+
+            /** Shows an extra row of function keys (F1-F12) above the keyboard ("true") */
+            public static final String FUNCTION_ROW = "FunctionRow";
+
+            /** Shows an extra row of keys useful in terminals / SSH sessions (Esc, Tab, Ctrl, Alt, Meta, arrows) ("true") */
+            public static final String SSH_ROW = "SshRow";
+
             private ExtraValue() {
                 // This utility class is not publicly instantiable.
             }

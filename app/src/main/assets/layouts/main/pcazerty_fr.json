@@ -1,0 +1,63 @@
+[
+  [
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "~", "popup": {"relevant": [{"label": "²"}, {"label": "¬"}]}, "width": 0.06667}, "default": {"label": "²", "popup": {"relevant": [{"label": "~"}, {"label": "¬"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "1", "popup": {"relevant": [{"label": "¹"}, {"label": "¡"}, {"label": "&"}]}, "width": 0.06667}, "default": {"label": "&", "popup": {"relevant": [{"label": "¹"}, {"label": "¡"}, {"label": "1"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "2", "popup": {"relevant": [{"label": "~"}, {"label": "⅛"}, {"label": "é"}]}, "width": 0.06667}, "default": {"label": "é", "popup": {"relevant": [{"label": "~"}, {"label": "⅛"}, {"label": "2"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "3", "popup": {"relevant": [{"label": "\\#"}, {"label": "£"}, {"label": "\""}]}, "width": 0.06667}, "default": {"label": "\"", "popup": {"relevant": [{"label": "\\#"}, {"label": "£"}, {"label": "3"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "4", "popup": {"relevant": [{"label": "{"}, {"label": "$"}, {"label": "'"}]}, "width": 0.06667}, "default": {"label": "'", "popup": {"relevant": [{"label": "{"}, {"label": "$"}, {"label": "4"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "5", "popup": {"relevant": [{"label": "["}, {"label": "⅜"}, {"label": "("}]}, "width": 0.06667}, "default": {"label": "(", "popup": {"relevant": [{"label": "["}, {"label": "⅜"}, {"label": "5"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "6", "popup": {"relevant": [{"label": "\\|"}, {"label": "⅝"}, {"label": "-"}]}, "width": 0.06667}, "default": {"label": "-", "popup": {"relevant": [{"label": "\\|"}, {"label": "⅝"}, {"label": "6"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "7", "popup": {"relevant": [{"label": "`"}, {"label": "⅞"}, {"label": "è"}]}, "width": 0.06667}, "default": {"label": "è", "popup": {"relevant": [{"label": "`"}, {"label": "⅞"}, {"label": "7"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "8", "popup": {"relevant": [{"label": "\\"}, {"label": "™"}, {"label": "_"}]}, "width": 0.06667}, "default": {"label": "_", "popup": {"relevant": [{"label": "\\"}, {"label": "™"}, {"label": "8"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "9", "popup": {"relevant": [{"label": "^"}, {"label": "±"}, {"label": "ç"}]}, "width": 0.06667}, "default": {"label": "ç", "popup": {"relevant": [{"label": "^"}, {"label": "±"}, {"label": "9"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "0", "popup": {"relevant": [{"label": "\\@"}, {"label": "°"}, {"label": "à"}]}, "width": 0.06667}, "default": {"label": "à", "popup": {"relevant": [{"label": "\\@"}, {"label": "°"}, {"label": "0"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "°", "popup": {"relevant": [{"label": "]"}, {"label": "¿"}, {"label": ")"}]}, "width": 0.06667}, "default": {"label": ")", "popup": {"relevant": [{"label": "]"}, {"label": "¿"}, {"label": "°"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "+", "popup": {"relevant": [{"label": "}"}, {"label": "˛"}, {"label": "="}]}, "width": 0.06667}, "default": {"label": "=", "popup": {"relevant": [{"label": "}"}, {"label": "˛"}, {"label": "+"}]}, "width": 0.06667}},
+    {"label": "delete", "width": 0.13333, "type": "function"}
+  ],
+  [
+    {"label": "tab", "width": 0.1, "type": "function"},
+    {"label": "a", "popup": {"relevant": [{"label": "æ"}]}, "width": 0.06667},
+    {"label": "z", "popup": {"relevant": [{"label": "«"}, {"label": "<"}]}, "width": 0.06667},
+    {"label": "e", "popup": {"relevant": [{"label": "€"}, {"label": "¢"}]}, "width": 0.06667},
+    {"label": "r", "popup": {"relevant": [{"label": "¶"}, {"label": "®"}]}, "width": 0.06667},
+    {"label": "t", "popup": {"relevant": [{"label": "ŧ"}]}, "width": 0.06667},
+    {"label": "y", "popup": {"relevant": [{"label": "←"}, {"label": "¥"}]}, "width": 0.06667},
+    {"label": "u", "popup": {"relevant": [{"label": "↓"}, {"label": "↑"}]}, "width": 0.06667},
+    {"label": "i", "popup": {"relevant": [{"label": "→"}, {"label": "ı"}]}, "width": 0.06667},
+    {"label": "o", "popup": {"relevant": [{"label": "ø"}]}, "width": 0.06667},
+    {"label": "p", "popup": {"relevant": [{"label": "þ"}]}, "width": 0.06667},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "¨", "popup": {"relevant": [{"label": "^"}, {"label": "¨"}, {"label": "˚"}]}, "width": 0.06667}, "default": {"label": "^", "popup": {"relevant": [{"label": "¨"}, {"label": "˚"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "£", "popup": {"relevant": [{"label": "$"}, {"label": "¤"}, {"label": "¯"}]}, "width": 0.06667}, "default": {"label": "$", "popup": {"relevant": [{"label": "£"}, {"label": "¤"}, {"label": "¯"}]}, "width": 0.06667}},
+    {"label": "Del", "code": -9, "type": "function", "width": 0.1}
+  ],
+  [
+    {"label": "caps", "code": -13, "width": 0.11667, "type": "function"},
+    {"label": "q", "popup": {"relevant": [{"label": "\\@"}, {"label": "Ω"}]}, "width": 0.06667},
+    {"label": "s", "popup": {"relevant": [{"label": "ß"}, {"label": "ẞ"}]}, "width": 0.06667},
+    {"label": "d", "popup": {"relevant": [{"label": "ð"}]}, "width": 0.06667},
+    {"label": "f", "popup": {"relevant": [{"label": "đ"}, {"label": "ª"}]}, "width": 0.06667},
+    {"label": "g", "popup": {"relevant": [{"label": "ŋ"}]}, "width": 0.06667},
+    {"label": "h", "popup": {"relevant": [{"label": "ħ"}]}, "width": 0.06667},
+    {"label": "j", "width": 0.06667},
+    {"label": "k", "popup": {"relevant": [{"label": "ĸ"}, {"label": "&"}]}, "width": 0.06667},
+    {"label": "l", "popup": {"relevant": [{"label": "ł"}]}, "width": 0.06667},
+    {"label": "m", "popup": {"relevant": [{"label": "µ"}, {"label": "º"}]}, "width": 0.06667},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "%", "popup": {"relevant": [{"label": "ù"}, {"label": "^"}, {"label": "ˇ"}]}, "width": 0.06667}, "default": {"label": "ù", "popup": {"relevant": [{"label": "%"}, {"label": "^"}, {"label": "ˇ"}]}, "width": 0.06667}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "µ", "popup": {"relevant": [{"label": "*"}, {"label": "`"}, {"label": "˘"}]}, "width": 0.06667}, "default": {"label": "*", "popup": {"relevant": [{"label": "µ"}, {"label": "`"}, {"label": "˘"}]}, "width": 0.06667}},
+    {"label": "action", "width": 0.08333}
+  ],
+  [
+    {"$": "shift_state_selector", "manualOrLocked": {"label": ">", "popup": {"relevant": [{"label": "<"}, {"label": "\\|"}, {"label": "¦"}]}, "width": 0.07121}, "default": {"label": "<", "popup": {"relevant": [{"label": ">"}, {"label": "\\|"}, {"label": "¦"}]}, "width": 0.07121}},
+    {"label": "w", "popup": {"relevant": [{"label": "ł"}]}, "width": 0.07121},
+    {"label": "x", "popup": {"relevant": [{"label": "»"}, {"label": ">"}]}, "width": 0.07121},
+    {"label": "c", "popup": {"relevant": [{"label": "¢"}, {"label": "©"}]}, "width": 0.07121},
+    {"label": "v", "popup": {"relevant": [{"label": "„"}, {"label": "‚"}]}, "width": 0.07121},
+    {"label": "b", "popup": {"relevant": [{"label": "“"}, {"label": "‘"}]}, "width": 0.07121},
+    {"label": "n", "popup": {"relevant": [{"label": "”"}, {"label": "’"}]}, "width": 0.07121},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "\\?", "popup": {"relevant": [{"label": ","}, {"label": "´"}, {"label": "˝"}]}, "width": 0.07121}, "default": {"label": ",", "popup": {"relevant": [{"label": "\\?"}, {"label": "´"}, {"label": "˝"}]}, "width": 0.07121}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": ".", "popup": {"relevant": [{"label": ";"}, {"label": "•"}, {"label": "×"}]}, "width": 0.07121}, "default": {"label": ";", "popup": {"relevant": [{"label": "."}, {"label": "•"}, {"label": "×"}]}, "width": 0.07121}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "/", "popup": {"relevant": [{"label": ":"}, {"label": "·"}, {"label": "÷"}]}, "width": 0.07121}, "default": {"label": ":", "popup": {"relevant": [{"label": "/"}, {"label": "·"}, {"label": "÷"}]}, "width": 0.07121}},
+    {"$": "shift_state_selector", "manualOrLocked": {"label": "§", "popup": {"relevant": [{"label": "!"}, {"label": "˙"}]}, "width": 0.07121}, "default": {"label": "!", "popup": {"relevant": [{"label": "§"}, {"label": "˙"}]}, "width": 0.07121}}
+  ]
+]

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import helium314.keyboard.keyboard.internal.KeyboardParams
 import helium314.keyboard.latin.R
 import helium314.keyboard.latin.settings.Settings
+import helium314.keyboard.latin.utils.currentSubtypeExtraRowCount
 import helium314.keyboard.latin.utils.ResourceUtils
 
 class ClipboardLayoutParams(ctx: Context) {
@@ -33,7 +34,7 @@ class ClipboardLayoutParams(ctx: Context) {
         val topPadding = res.getFraction(R.fraction.config_keyboard_top_padding_holo,
                 defaultKeyboardHeight, defaultKeyboardHeight).toInt()
 
-        val rowCount = KeyboardParams.DEFAULT_KEYBOARD_ROWS + if (sv.mShowsNumberRow) 1 else 0
+        val rowCount = KeyboardParams.DEFAULT_KEYBOARD_ROWS + currentSubtypeExtraRowCount(sv.mShowsNumberRow)
         bottomRowKeyboardHeight = (defaultKeyboardHeight - bottomPadding - topPadding) / rowCount - keyVerticalGap / 2
         // height calculation is not good enough, probably also because keyboard top padding might be off by a pixel (see KeyboardParser)
         val offset = 1.25f * res.displayMetrics.density * sv.mKeyboardHeightScale

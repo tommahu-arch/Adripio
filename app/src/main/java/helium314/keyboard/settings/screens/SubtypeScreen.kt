@@ -205,6 +205,53 @@ fun SubtypeScreen(
                         }
                     }
                 }
+                run {
+                    val showNumberRow = currentSubtype.getExtraValueOf(ExtraValue.NUMBER_ROW)?.toBoolean()
+                    WithSmallTitle(stringResource(R.string.number_row)) {
+                        ActionRow {
+                            Text(stringResource(R.string.show_number_row_for_subtype),
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(start = 10.dp)
+                            )
+                            Switch(
+                                checked = showNumberRow ?: prefs.getBoolean(
+                                    Settings.PREF_SHOW_NUMBER_ROW,
+                                    Defaults.PREF_SHOW_NUMBER_ROW
+                                ),
+                                onCheckedChange = {
+                                    setCurrentSubtype(currentSubtype.with(ExtraValue.NUMBER_ROW, it.toString()))
+                                }
+                            )
+                            DefaultButton(showNumberRow == null) {
+                                setCurrentSubtype(currentSubtype.without(ExtraValue.NUMBER_ROW))
+                            }
+                        }
+                    }
+                }
+                WithSmallTitle(stringResource(R.string.extra_rows)) {
+                    listOf(
+                        ExtraValue.FUNCTION_ROW to R.string.function_row,
+                        ExtraValue.SSH_ROW to R.string.ssh_row,
+                    ).forEach { (extraValue, textId) ->
+                        ActionRow {
+                            Text(stringResource(textId),
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(start = 10.dp)
+                            )
+                            Switch(
+                                checked = currentSubtype.getExtraValueOf(extraValue)?.toBoolean() == true,
+                                onCheckedChange = {
+                                    setCurrentSubtype(
+                                        if (it) currentSubtype.with(extraValue, "true")
+                                        else currentSubtype.without(extraValue)
+                                    )
+                                }
+                            )
+                        }
+                    }
+                }
                 if (LocaleKeyboardInfos.hasLocalizedNumberRow(currentSubtype.locale, ctx)) {
                     val checked = currentSubtype.getExtraValueOf(ExtraValue.LOCALIZED_NUMBER_ROW)?.toBoolean()
                     WithSmallTitle(stringResource(R.string.number_row)) {

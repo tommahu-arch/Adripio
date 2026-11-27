@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 package helium314.keyboard.keyboard.internal.keyboard_parser
 
+import helium314.keyboard.latin.common.Constants.Subtype.ExtraValue
+import helium314.keyboard.latin.utils.extraRowCount
+import helium314.keyboard.latin.utils.hasExtraRow
 import android.content.Context
 import android.content.res.Configuration
 import helium314.keyboard.latin.utils.Log
@@ -66,7 +69,7 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
         if (params.mId.element.isBottomRow) {
             heightRescale = 4f
             // to have same height as alpha keyboard we act as if we had the default number of rows
-            val virtualRows = if (Settings.getValues().mShowsNumberRow) 5 else 4 // determine from Settings, because it's not actually in params for bottom rows
+            val virtualRows = 4 + params.mId.subtype.extraRowCount(Settings.getValues().mShowsNumberRow) // determine from Settings and subtype, because it's not actually in params for bottom rows
             // params rescale is not perfect, especially mTopPadding may cause 1 pixel offsets because it's already been converted to int once
             params.mOccupiedHeight /= virtualRows
             params.mBaseHeight /= virtualRows
@@ -102,12 +105,19 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
 
         val numberRow = getNumberRow()
         addNumberRowOrPopupKeys(baseKeys, numberRow)
-        if (element.isAlphabet)
+        if (element.isAlphabet && !hasOwnSymbolPopups())
             addSymbolPopupKeys(baseKeys)
         if (element.isAlphaOrSymbol && params.mId.numberRowEnabled) {
             val newLabelFlags = defaultLabelFlags or
                     if (Settings.getValues().mShowNumberRowHints) 0 else Key.LABEL_FLAGS_DISABLE_HINT_LABEL
             baseKeys.add(0, numberRow.mapTo(mutableListOf()) { it.copy(newLabelFlags = newLabelFlags) })
+        }
+        if (element.isAlphaOrSymbol) {
+            // optional extra rows above the number row, from top: function keys, ssh keys
+            if (params.mId.subtype.hasExtraRow(ExtraValue.SSH_ROW))
+                baseKeys.add(0, LayoutParser.parseExtraRow("ssh_row", params, context))
+            if (params.mId.subtype.hasExtraRow(ExtraValue.FUNCTION_ROW))
+                baseKeys.add(0, LayoutParser.parseExtraRow("function_row", params, context))
         }
         if (!params.mAllowRedundantPopupKeys)
             params.baseKeys = baseKeys.flatMap { row -> row.map { it.toKeyParams(params) } }
@@ -330,9 +340,12 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
         return row
     }
 
+    // layouts that define all their symbols as explicit popups (symbol layer keys would be added by position, and not match)
+    private fun hasOwnSymbolPopups() = params.mId.subtype.mainLayoutName == "pcazerty_fr"
+
     // some layouts have numbers hardcoded in the main layout (pcqwerty as keys, and others as popups)
     private fun hasBuiltInNumbers() = when (params.mId.subtype.mainLayoutName) {
-        "pcqwerty" -> true
+        "pcqwerty", "pcazerty_fr" -> true
         "lao", "thai", "korean_sebeolsik_390", "korean_sebeolsik_final" -> params.mPopupKeyOrder.contains(POPUP_KEYS_LAYOUT)
         else -> false
     }

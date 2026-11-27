@@ -141,13 +141,10 @@ class KeyboardActionListenerImpl(private val latinIME: LatinIME, private val inp
             Event.createSoftwareDeadEvent(primaryCode, 0, metaState,
                 mkv?.getKeyX(x) ?: Constants.NOT_A_COORDINATE, mkv?.getKeyY(y) ?: Constants.NOT_A_COORDINATE, null)
         } else {
-            // todo:
-            //  setting meta shift should only be done for arrow and similar cursor movement keys
-            //  should only be enabled once it works more reliably (currently depends on app for some reason)
-//            if (mkv.keyboard?.mId?.isAlphabetShiftedManually == true)
-//                Event.createSoftwareKeypressEvent(primaryCode, metaState or KeyEvent.META_SHIFT_ON, mkv.getKeyX(x), mkv.getKeyY(y), isKeyRepeat)
-//            else Event.createSoftwareKeypressEvent(primaryCode, metaState, mkv.getKeyX(x), mkv.getKeyY(y), isKeyRepeat)
-            Event.createSoftwareKeypressEvent(primaryCode, metaState,
+            // with manual shift (or shift lock) cursor movement keys extend the selection, like shift + arrow on a hardware keyboard
+            val shiftMeta = if (primaryCode.isCursorMovement() && mkv?.keyboard?.mId?.element?.isAlphabetShiftedManually == true)
+                KeyEvent.META_SHIFT_ON else 0
+            Event.createSoftwareKeypressEvent(primaryCode, metaState or shiftMeta,
                 mkv?.getKeyX(x) ?: Constants.NOT_A_COORDINATE, mkv?.getKeyY(y) ?: Constants.NOT_A_COORDINATE, isKeyRepeat)
         }
         latinIME.onEvent(event)
@@ -537,6 +534,13 @@ class KeyboardActionListenerImpl(private val latinIME: LatinIME, private val inp
             KeyCode.META_LEFT               -> KeyEvent.META_META_LEFT_ON
             KeyCode.META_RIGHT              -> KeyEvent.META_META_RIGHT_ON
             else -> null
+        }
+
+        private fun Int.isCursorMovement() = when (this) {
+            KeyCode.ARROW_LEFT, KeyCode.ARROW_RIGHT, KeyCode.ARROW_UP, KeyCode.ARROW_DOWN,
+            KeyCode.MOVE_START_OF_LINE, KeyCode.MOVE_END_OF_LINE, KeyCode.MOVE_START_OF_PAGE, KeyCode.MOVE_END_OF_PAGE,
+            KeyCode.WORD_LEFT, KeyCode.WORD_RIGHT, KeyCode.PAGE_UP, KeyCode.PAGE_DOWN -> true
+            else -> false
         }
 
         private fun Int.isMetaLock() = this == KeyCode.CTRL_LOCK || this == KeyCode.ALT_LOCK || this == KeyCode.FN_LOCK || this == KeyCode.META_LOCK

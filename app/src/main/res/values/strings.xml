@@ -308,6 +308,14 @@
     <!-- Title of the setting to replace the top row in symbols layout with number row -->
     <string name="number_row_in_symbols">Show number row in symbols view</string>
     <!-- Title of the setting to localize number row -->
+    <!-- Switch in the settings of a single language/layout: show the number row (overrides the general setting) -->
+    <!-- Title of the section in the settings of a single language/layout where optional extra rows can be enabled -->
+    <string name="extra_rows">Extra rows</string>
+    <!-- Switch to show a row of function keys F1 to F12 -->
+    <string name="function_row">Function keys row (F1–F12)</string>
+    <!-- Switch to show a row of keys for terminals: Esc, Tab, Ctrl, Alt, Meta and arrows -->
+    <string name="ssh_row">SSH keys row (Esc, Tab, Ctrl, Alt, Meta, arrows)</string>
+    <string name="show_number_row_for_subtype">Show number row</string>
     <string name="localized_number_row">Localize number row</string>
     <!-- Description of the settings to localize number row -->
     <string name="localized_number_row_summary">Prefer localized over latin numbers</string>
@@ -994,6 +1002,18 @@ New dictionary:
     <string name="name_invalid">Invalid name</string>
     <!-- Description indicating a subtype in Locales & Layouts has customizations -->
     <string name="custom_subtype">Custom subtype</string>
+    <!-- Long-press menu entry in Languages & Layouts: add another subtype with a different layout for this language -->
+    <string name="create_another_layout">Create another layout for this language</string>
+    <!-- Entry at the end of the layout list: create a new custom layout, based on the layout of the long-pressed language -->
+    <string name="create_custom_layout_entry">Custom layout…</string>
+    <!-- Long-press menu entry in Languages & Layouts for custom layouts -->
+    <string name="rename_custom_template">Rename this custom template</string>
+    <!-- Long-press menu entry in Languages & Layouts for custom subtypes -->
+    <string name="delete_custom_subtype">Delete this custom layout</string>
+    <!-- Confirmation question when deleting a custom subtype -->
+    <string name="delete_custom_subtype_confirm">Really delete %s?</string>
+    <!-- Label of the text field where the name of a custom layout is entered -->
+    <string name="custom_layout_name">Layout name</string>
     <!-- Name for landscape orientation, used in various settings -->
     <string name="landscape">Landscape</string>
     <!-- When a foldable phone is folded -->
