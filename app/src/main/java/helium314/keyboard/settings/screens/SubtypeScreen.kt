@@ -252,6 +252,31 @@ fun SubtypeScreen(
                         }
                     }
                 }
+                // height of the extra rows, only for the rows that are shown
+                listOf(
+                    Triple(ExtraValue.NUMBER_ROW_SCALE, R.string.number_row_height,
+                        currentSubtype.getExtraValueOf(ExtraValue.NUMBER_ROW)?.toBoolean()
+                            ?: prefs.getBoolean(Settings.PREF_SHOW_NUMBER_ROW, Defaults.PREF_SHOW_NUMBER_ROW)),
+                    Triple(ExtraValue.FUNCTION_ROW_SCALE, R.string.function_row_height,
+                        currentSubtype.getExtraValueOf(ExtraValue.FUNCTION_ROW)?.toBoolean() == true),
+                    Triple(ExtraValue.SSH_ROW_SCALE, R.string.ssh_row_height,
+                        currentSubtype.getExtraValueOf(ExtraValue.SSH_ROW)?.toBoolean() == true),
+                ).forEach { (scaleKey, titleId, shown) ->
+                    if (!shown) return@forEach
+                    val explicit = currentSubtype.getExtraValueOf(scaleKey)?.toIntOrNull()
+                    WithSmallTitle(stringResource(titleId)) {
+                        DropDownField(
+                            items = listOf(100, 90, 80, 70, 60, 50),
+                            selectedItem = explicit ?: 100,
+                            onSelected = {
+                                setCurrentSubtype(
+                                    if (it == 100) currentSubtype.without(scaleKey)
+                                    else currentSubtype.with(scaleKey, it.toString())
+                                )
+                            },
+                        ) { Text("$it %") }
+                    }
+                }
                 if (LocaleKeyboardInfos.hasLocalizedNumberRow(currentSubtype.locale, ctx)) {
                     val checked = currentSubtype.getExtraValueOf(ExtraValue.LOCALIZED_NUMBER_ROW)?.toBoolean()
                     WithSmallTitle(stringResource(R.string.number_row)) {

@@ -27,15 +27,31 @@ fun RichInputMethodSubtype.showsNumberRow(default: Boolean): Boolean =
 fun RichInputMethodSubtype.hasExtraRow(extraValueKey: String): Boolean =
     getExtraValueOf(extraValueKey)?.toBoolean() == true
 
-/** Number of rows added to the 4 default rows: number row (or [defaultNumberRow] if the subtype has no setting) and extra rows. */
-fun RichInputMethodSubtype.extraRowCount(defaultNumberRow: Boolean): Int =
-    (if (showsNumberRow(defaultNumberRow)) 1 else 0) +
-        (if (hasExtraRow(ExtraValue.FUNCTION_ROW)) 1 else 0) + (if (hasExtraRow(ExtraValue.SSH_ROW)) 1 else 0)
+private fun RichInputMethodSubtype.rowScale(extraValueKey: String): Float =
+    (getExtraValueOf(extraValueKey)?.toIntOrNull() ?: 100).coerceIn(30, 100) / 100f
 
-/** [extraRowCount] for the current subtype, for code that has no subtype at hand (e.g. clipboard and emoji view sizes). */
-fun currentSubtypeExtraRowCount(defaultNumberRow: Boolean): Int =
-    if (RichInputMethodManager.isInitialized()) RichInputMethodManager.getInstance().currentSubtype.extraRowCount(defaultNumberRow)
-    else if (defaultNumberRow) 1 else 0
+/** Height of the extra rows above the default rows in the order they appear (function keys, ssh keys, number row), relative to a normal row. */
+fun RichInputMethodSubtype.extraRowScales(defaultNumberRow: Boolean): List<Float> = listOfNotNull(
+    if (hasExtraRow(ExtraValue.FUNCTION_ROW)) rowScale(ExtraValue.FUNCTION_ROW_SCALE) else null,
+    if (hasExtraRow(ExtraValue.SSH_ROW)) rowScale(ExtraValue.SSH_ROW_SCALE) else null,
+    if (showsNumberRow(defaultNumberRow)) rowScale(ExtraValue.NUMBER_ROW_SCALE) else null,
+)
+
+/** Each extra row adds this part of the default keyboard height, multiplied by its scale (1/3 is what a number row has always added). */
+private const val EXTRA_ROW_HEIGHT = 0.33f
+
+/** Keyboard height relative to the height without extra rows. */
+fun RichInputMethodSubtype.keyboardHeightFactor(defaultNumberRow: Boolean): Float =
+    1f + EXTRA_ROW_HEIGHT * extraRowScales(defaultNumberRow).sum()
+
+/** [extraRowScales] for the current subtype, for code that has no subtype at hand (e.g. clipboard and emoji view sizes). */
+fun currentSubtypeExtraRowScales(defaultNumberRow: Boolean): List<Float> =
+    if (RichInputMethodManager.isInitialized()) RichInputMethodManager.getInstance().currentSubtype.extraRowScales(defaultNumberRow)
+    else if (defaultNumberRow) listOf(1f) else emptyList()
+
+/** [keyboardHeightFactor] for the current subtype. */
+fun currentSubtypeHeightFactor(defaultNumberRow: Boolean): Float =
+    1f + EXTRA_ROW_HEIGHT * currentSubtypeExtraRowScales(defaultNumberRow).sum()
 
 fun InputMethodSubtype.locale(): Locale {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

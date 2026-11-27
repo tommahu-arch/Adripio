@@ -315,6 +315,10 @@
     <string name="function_row">Function keys row (F1–F12)</string>
     <!-- Switch to show a row of keys for terminals: Esc, Tab, Ctrl, Alt, Meta and arrows -->
     <string name="ssh_row">SSH keys row (Esc, Tab, Ctrl, Alt, Meta, arrows)</string>
+    <!-- Height of the number row / function keys row / SSH keys row, in percent of a normal key row -->
+    <string name="number_row_height">Number row height</string>
+    <string name="function_row_height">Function keys row height</string>
+    <string name="ssh_row_height">SSH keys row height</string>
     <string name="show_number_row_for_subtype">Show number row</string>
     <string name="localized_number_row">Localize number row</string>
     <!-- Description of the settings to localize number row -->

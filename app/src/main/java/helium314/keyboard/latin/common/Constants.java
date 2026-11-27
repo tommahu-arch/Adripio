@@ -104,6 +104,11 @@ public final class Constants {
             /** Shows an extra row of keys useful in terminals / SSH sessions (Esc, Tab, Ctrl, Alt, Meta, arrows) ("true") */
             public static final String SSH_ROW = "SshRow";
 
+            /** Height of the number row / function row / ssh row in percent of a normal row (30 to 100, default 100) */
+            public static final String NUMBER_ROW_SCALE = "NumberRowScale";
+            public static final String FUNCTION_ROW_SCALE = "FunctionRowScale";
+            public static final String SSH_ROW_SCALE = "SshRowScale";
+
             private ExtraValue() {
                 // This utility class is not publicly instantiable.
             }

@@ -195,7 +195,7 @@ object Defaults {
     const val PREF_RECENT_EMOJIS = ""
     const val PREF_LAST_SHOWN_EMOJI_CATEGORY_PAGE_ID = 0
     const val PREF_SHOW_DEBUG_SETTINGS = false
-    val PREF_DEBUG_MODE = BuildConfig.DEBUG
+    const val PREF_DEBUG_MODE = false // also for debug builds, as debug mode replaces the language on the space bar with dictionary info
     const val PREF_SHOW_SUGGESTION_INFOS = false
     const val PREF_FORCE_NON_DISTINCT_MULTITOUCH = false
     const val PREF_SLIDING_KEY_INPUT_PREVIEW = true
