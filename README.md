@@ -1,18 +1,18 @@
-> **Adripio** is a personal fork of [HeliBoard](https://github.com/HeliBorg/HeliBoard) (GPL-3.0). Package
-> `io.adrip.keyboard`; debug and release builds share one package and one signing key. Original copyright
-> notices are kept; this fork modifies the original work.
+# Adripio
+Adripio is a personal fork of [HeliBoard](https://github.com/HeliBorg/HeliBoard), a privacy-conscious and customizable
+open-source keyboard based on AOSP / OpenBoard. Like HeliBoard it does not use the internet permission, and thus is 100% offline.
 
-# HeliBoard
-HeliBoard is a privacy-conscious and customizable open-source keyboard, based on AOSP / OpenBoard.
-Does not use internet permission, and thus is 100% offline.
+Adripio is licensed under GPL-3.0 like HeliBoard. Original copyright and license notices are kept, and modified files are
+marked as modified. Everything that is not listed under [Differences from HeliBoard](#differences-from-heliboard) is
+HeliBoard, and its documentation (wiki, [layouts.md](layouts.md)) applies.
 
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/helium314.keyboard/)
-[<img src="https://user-images.githubusercontent.com/663460/26973090-f8fdc986-4d14-11e7-995a-e7c5e79ed925.png" alt="Get APK from GitHub" height="80">](https://github.com/HeliBorg/HeliBoard/releases/latest)
-[<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="80">](https://apt.izzysoft.de/fdroid/index/apk/helium314.keyboard)
+[<img src="https://user-images.githubusercontent.com/663460/26973090-f8fdc986-4d14-11e7-995a-e7c5e79ed925.png" alt="Get APK from GitHub" height="80">](https://github.com/tommahu-arch/Adripio/releases/latest)
 
 ## Table of Contents
 
-- [Features](#features)
+- [Differences from HeliBoard](#differences-from-heliboard)
+- [Features of HeliBoard](#features-of-heliboard)
+- [Building](#building)
 - [Contributing](#contributing-)
    * [Reporting Issues](#reporting-issues)
    * [Translations](#translations)
@@ -23,7 +23,41 @@ Does not use internet permission, and thus is 100% offline.
 - [Credits](#credits)
   * [Funding](#funding)
 
-# Features
+# Differences from HeliBoard
+
+**Identity**
+- Package `io.adrip.keyboard`, app name "Adripio". It installs next to HeliBoard and does not replace it, and the two do not
+  share settings or data. The Kotlin / Java package stays `helium314.keyboard`, so merging upstream stays easy.
+- Debug and release builds use the same package, name and signing key, so any APK updates the installed one in place and keeps its data.
+
+**Languages & Layouts**
+- Long press a language to create another layout for it: pick one of the available layouts, or "Custom layout…", which copies
+  the layout of that row under a name you choose. Each one is a separate entry with its own on / off switch.
+- Long press an entry you added to rename its custom layout, or to delete it (after a confirmation).
+
+**PC AZERTY fr layout (`pcazerty_fr`)**
+- Standard, shift and AltGr characters of a French PC keyboard, taken from the xkb `fr` layout. AltGr characters are popups,
+  and the small hint on a key shows the shifted (or AltGr) character.
+- PC style row offsets: Tab, Caps lock, Backspace and Del keys, with `Q` and `W` offset as on a PC.
+- Comes with a PC style functional layout (`functional_keys_pc`), used automatically with this layout: narrow Shift keys,
+  Ctrl / Meta / Alt in the bottom row, and `←` `↓` `→` with `↑` above `↓`.
+- Add it from the long-press menu of a Latin script language ("Create another layout for this language").
+
+**Per language options** (language settings screen)
+- Show the number row for this language only, overriding the general setting.
+- Optional extra rows above the keyboard: function keys (Esc, F1–F12) and "SSH keys" (Esc, Tab, Ctrl, Alt, Meta, arrows).
+  The rows are layout files in `assets/layouts/extra_rows`.
+
+**Keys and input**
+- Shift + a cursor movement key (arrows, home, end, page up / down) extends the selection while shift is on, like on a hardware keyboard.
+- Forward delete: a key with `"code": -9` in a custom layout deletes the character after the cursor.
+- The standard number row has a `.` key after `0`.
+
+**Other**
+- Floating button: tap hides or shows the keyboard, double tap switches between fixed and floating, long press opens the keyboard picker
+  (Settings > Floating button).
+
+# Features of HeliBoard
 <ul>
   <li>Add dictionaries for suggestions and spell check</li>
   <ul>
@@ -54,11 +88,18 @@ Does not use internet permission, and thus is 100% offline.
 
 For [FAQ](https://github.com/HeliBorg/HeliBoard/wiki/FAQ), [hidden features](https://github.com/HeliBorg/HeliBoard/wiki/9.-Hidden-features) and more information about the app and features, please visit the [wiki](https://github.com/HeliBorg/HeliBoard/wiki)
 
+# Building
+JDK 17, Android SDK (platform 37) and NDK 28.0.13004108 (native code) are needed.
+`./gradlew assembleDebug` or `./gradlew assembleRelease`, the APK ends up in `app/build/outputs/apk/<type>/`.
+Release builds are signed with the key from a `keystore.properties` file in the repository root (not part of the repository);
+without it the release APK is unsigned and debug builds use the default debug key.
+Upstream changes are merged with `git fetch upstream && git merge upstream/main`.
+
 # Contributing ❤
 
 ## Reporting Issues
 
-Whether you encountered a bug, or want to see a new feature in HeliBoard, you can contribute to the project by opening a new issue [here](https://github.com/HeliBorg/HeliBoard/issues). Your help is always welcome!
+Adripio is a personal fork. Problems with features that come from HeliBoard are best reported to [HeliBoard](https://github.com/HeliBorg/HeliBoard/issues), after checking that they also happen there. For things that are specific to Adripio (see [Differences from HeliBoard](#differences-from-heliboard)) open an issue in the [Adripio repository](https://github.com/tommahu-arch/Adripio/issues).
 
 Before opening a new issue, be sure to check the following:
  - **Does the issue already exist?** Make sure a similar issue has not been reported by browsing [existing issues](https://github.com/HeliBorg/HeliBoard/issues?q=). Please search open and closed issues. In case of feature requests you could also check the [FAQ](https://github.com/HeliBorg/HeliBoard/wiki/FAQ) and [hidden features](https://github.com/HeliBorg/HeliBoard/wiki/9.-Hidden-features).
@@ -117,7 +158,7 @@ See [Contribution Guidelines](CONTRIBUTING.md)
 
 # License
 
-HeliBoard (as a fork of OpenBoard) is licensed under GNU General Public License v3.0.
+Adripio (as a fork of HeliBoard, which is a fork of OpenBoard) is licensed under GNU General Public License v3.0.
 
  > Permissions of this strong copyleft license are conditioned on making available complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights.
 
