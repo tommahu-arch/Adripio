@@ -1,0 +1,3 @@
+* the number row is now an extra row in the language settings: "Show number row" (0-9) or "Show number row with dot" (adds a "." after 0)
+* the default functional keys layout is always the phone one, never the tablet one
+* new "Dematerialis" color theme
