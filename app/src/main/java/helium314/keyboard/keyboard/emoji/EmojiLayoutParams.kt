@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import helium314.keyboard.keyboard.internal.KeyboardParams
 import helium314.keyboard.latin.R
 import helium314.keyboard.latin.settings.Settings
-import helium314.keyboard.latin.utils.currentSubtypeExtraRowCount
+import helium314.keyboard.latin.utils.currentSubtypeExtraRowScales
 import helium314.keyboard.latin.utils.ResourceUtils
 
 internal class EmojiLayoutParams(res: Resources) {
@@ -32,8 +32,8 @@ internal class EmojiLayoutParams(res: Resources) {
         val topPadding = res.getFraction(R.fraction.config_keyboard_top_padding_holo,
             defaultKeyboardHeight, defaultKeyboardHeight).toInt()
 
-        val rowCount = KeyboardParams.DEFAULT_KEYBOARD_ROWS + currentSubtypeExtraRowCount(sv.mShowsNumberRow)
-        bottomRowKeyboardHeight = (defaultKeyboardHeight - bottomPadding - topPadding) / rowCount - keyVerticalGap / 2
+        val rowCount = KeyboardParams.DEFAULT_KEYBOARD_ROWS + currentSubtypeExtraRowScales(sv.mShowsNumberRow).sum()
+        bottomRowKeyboardHeight = ((defaultKeyboardHeight - bottomPadding - topPadding) / rowCount).toInt() - keyVerticalGap / 2
 
         val pageIdHeight = res.getDimension(R.dimen.config_emoji_category_page_id_height)
         emojiCategoryPageIdViewHeight = pageIdHeight.toInt()

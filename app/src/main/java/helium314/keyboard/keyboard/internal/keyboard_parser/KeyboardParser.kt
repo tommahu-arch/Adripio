@@ -2,7 +2,7 @@
 package helium314.keyboard.keyboard.internal.keyboard_parser
 
 import helium314.keyboard.latin.common.Constants.Subtype.ExtraValue
-import helium314.keyboard.latin.utils.extraRowCount
+import helium314.keyboard.latin.utils.extraRowScales
 import helium314.keyboard.latin.utils.hasExtraRow
 import android.content.Context
 import android.content.res.Configuration
@@ -65,26 +65,36 @@ class KeyboardParser(private val params: KeyboardParams, private val context: Co
         }
         val baseKeys = LayoutParser.parseLayout(layoutType, params, context)
         val keysInRows = createRows(baseKeys)
+        // heights of the extra rows (function keys, ssh keys, number row) relative to a normal row, in the order they are inserted at the top
+        val extraRowScales = if (params.mId.element.isAlphaOrSymbol || params.mId.element.isBottomRow)
+                params.mId.subtype.extraRowScales(Settings.getValues().mShowsNumberRow)
+            else emptyList()
+        val extraRows = if (params.mId.element.isBottomRow) 0 else extraRowScales.size
+        // number of rows, counting the extra rows according to their height
+        val rowUnits = keysInRows.size - extraRows + (if (params.mId.element.isBottomRow) 0f else extraRowScales.sum())
         val heightRescale: Float
         if (params.mId.element.isBottomRow) {
             heightRescale = 4f
             // to have same height as alpha keyboard we act as if we had the default number of rows
-            val virtualRows = 4 + params.mId.subtype.extraRowCount(Settings.getValues().mShowsNumberRow) // determine from Settings and subtype, because it's not actually in params for bottom rows
+            val virtualRows = 4f + extraRowScales.sum() // determine from Settings and subtype, because it's not actually in params for bottom rows
             // params rescale is not perfect, especially mTopPadding may cause 1 pixel offsets because it's already been converted to int once
-            params.mOccupiedHeight /= virtualRows
-            params.mBaseHeight /= virtualRows
+            params.mOccupiedHeight = (params.mOccupiedHeight / virtualRows).toInt()
+            params.mBaseHeight = (params.mBaseHeight / virtualRows).toInt()
             params.mTopPadding = (params.mTopPadding.toDouble() / virtualRows).roundToInt()
         } else {
             // rescale height if we have anything but the usual 4 rows
-            heightRescale = if (keysInRows.size != 4) 4f / keysInRows.size else 1f
+            heightRescale = if (rowUnits != 4f) 4f / rowUnits else 1f
         }
-        if (heightRescale != 1f) {
-            keysInRows.forEach { row -> row.forEach { it.mHeight *= heightRescale } }
+        if (heightRescale != 1f || extraRows > 0) {
+            keysInRows.forEachIndexed { i, row ->
+                val scale = heightRescale * (if (i < extraRows) extraRowScales[i] else 1f)
+                row.forEach { it.mHeight *= scale }
+            }
         }
         // rescale without changing keyboard height
         if (params.mId.element.takesFunctionalKeys) {
             val bottomRowScale = Settings.getValues().mBottomRowScale
-            val otherRowScale = (keysInRows.size - bottomRowScale) / (keysInRows.size - 1)
+            val otherRowScale = (rowUnits - bottomRowScale) / (rowUnits - 1)
             keysInRows.forEachIndexed { i, row ->
                 row.forEach { it.mHeight *= if (i == keysInRows.lastIndex) bottomRowScale else otherRowScale }
             }

@@ -32,12 +32,13 @@ class App : Application() {
         // other inits can be in parallel, except what depends on SubtypeSettings
         val jobs = listOf(
             scope.launch {
+                // SubtypeSettings (and the layout defaults it uses) need Settings to be initialized, so this can't run in a separate job
+                Settings.init(ctx)
                 SubtypeSettings.init(ctx)
                 RichInputMethodManager.init(ctx)
                 checkVersionUpgrade(ctx)
             },
             scope.launch { FoldableUtils.init(ctx) },
-            scope.launch { Settings.init(ctx) },
             // upgrade toolbar on every debug apk start because we may work on adding a new toolbar key
             scope.launch { if (BuildConfig.DEBUG) upgradeToolbarPrefs(prefs()) },
             scope.launch { transferOldPinnedClips(ctx) }, // todo: remove in a few months, maybe end 2026
