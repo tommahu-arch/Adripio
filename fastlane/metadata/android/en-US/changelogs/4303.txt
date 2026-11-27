@@ -1,0 +1,5 @@
+* add the PC AZERTY fr layout: standard, shift and AltGr characters as on a French PC keyboard, with Tab, Caps lock, Del and a PC style bottom row with Ctrl, Meta, Alt and arrows
+* Languages & Layouts: long press a language to create another layout for it, rename or delete custom ones
+* per language settings: show number row, function keys row (Esc, F1-F12) and SSH keys row (Esc, Tab, Ctrl, Alt, Meta, arrows)
+* shift + arrow keys extend the selection, forward delete key code
+* add a dot key after 0 in the number row

@@ -25,8 +25,8 @@ android {
         applicationId = "io.adrip.keyboard"
         minSdk = 21
         targetSdk = 37
-        versionCode = 4302
-        versionName = "0.0.1"
+        versionCode = 4303
+        versionName = "0.0.2"
         ndk {
             abiFilters.clear()
             abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64"))
