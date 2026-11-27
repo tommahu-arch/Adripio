@@ -179,8 +179,6 @@ The icon is licensed under [Creative Commons BY-SA 4.0](https://creativecommons.
 
 ## Funding
 
-This project is funded through [NGI Mobifree Fund](https://nlnet.nl/mobifree), a fund established by [NLnet](https://nlnet.nl) with financial support from the European Commission's [Next Generation Internet](https://ngi.eu) program. Learn more at the [NLnet project page](https://nlnet.nl/project/GestureTyping).
+Adripio is a personal project and does not receive any funding.
 
-[<img src="https://nlnet.nl/logo/banner.png" alt="NLnet foundation logo" width="20%" />](https://nlnet.nl)
-
-Further the project benefits from donations provided by many users (thank you all!).
+The upstream project, HeliBoard, is funded through [NGI Mobifree Fund](https://nlnet.nl/mobifree), a fund established by [NLnet](https://nlnet.nl) with financial support from the European Commission's [Next Generation Internet](https://ngi.eu) program (see the [NLnet project page](https://nlnet.nl/project/GestureTyping)), and benefits from donations provided by many of its users. That funding and those donations support HeliBoard, not this fork.
